@@ -1,0 +1,12 @@
+{
+	"name": "FedExDataLakeGen2",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://fedex7.dfs.core.windows.net/",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDFCMUI4NzM1LTg4OTgtNDUzMy04MkQxLTlEMkE4NTg4NkM2Rl9lNDI4ODA4Yi00ZDcyLTQ2MjItOWE0Mi00YWFkOWMzZWJkMzciDQp9"
+		}
+	}
+}
