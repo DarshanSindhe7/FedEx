@@ -8,6 +8,9 @@
 		"parameters": {
 			"Filename": {
 				"type": "string"
+			},
+			"Destination": {
+				"type": "string"
 			}
 		},
 		"annotations": [],
@@ -19,7 +22,10 @@
 					"value": "@dataset().Filename",
 					"type": "Expression"
 				},
-				"folderPath": "CopiedProject",
+				"folderPath": {
+					"value": "@dataset().Destination",
+					"type": "Expression"
+				},
 				"fileSystem": "fedex-container"
 			},
 			"columnDelimiter": ",",
