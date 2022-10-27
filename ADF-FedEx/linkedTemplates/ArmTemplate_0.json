@@ -22,14 +22,6 @@
 		"AzureDatabricks1_properties_typeProperties_existingClusterId": {
 			"type": "string",
 			"defaultValue": "1027-123043-uh05wwep"
-		},
-		"CopyDataFromClientToData_properties_pipeline1_parameters_FolderName": {
-			"type": "string",
-			"defaultValue": "Project"
-		},
-		"CopyDataFromClientToData_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/dcaa6303-34ab-4fb8-982f-d7414263c245/resourceGroups/DRS_DEV/providers/Microsoft.Storage/storageAccounts/fedexstoragecontainer"
 		}
 	},
 	"variables": {
@@ -83,6 +75,9 @@
 				"parameters": {
 					"Filename": {
 						"type": "string"
+					},
+					"Destination": {
+						"type": "string"
 					}
 				},
 				"annotations": [],
@@ -94,7 +89,10 @@
 							"value": "@dataset().Filename",
 							"type": "Expression"
 						},
-						"folderPath": "CopiedProject",
+						"folderPath": {
+							"value": "@dataset().Destination",
+							"type": "Expression"
+						},
 						"fileSystem": "fedex-container"
 					},
 					"columnDelimiter": ",",
@@ -392,6 +390,10 @@
 												"Filename": {
 													"value": "@item().name",
 													"type": "Expression"
+												},
+												"Destination": {
+													"value": "@item().name",
+													"type": "Expression"
 												}
 											}
 										}
@@ -416,39 +418,6 @@
 				"[concat(variables('factoryId'), '/datasets/MetadataSource')]",
 				"[concat(variables('factoryId'), '/datasets/ForEachSource')]",
 				"[concat(variables('factoryId'), '/datasets/ForEachDest')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/CopyDataFromClientToData')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Stopped",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "pipeline1",
-							"type": "PipelineReference"
-						},
-						"parameters": {
-							"FolderName": "[parameters('CopyDataFromClientToData_properties_pipeline1_parameters_FolderName')]"
-						}
-					}
-				],
-				"type": "BlobEventsTrigger",
-				"typeProperties": {
-					"blobPathBeginsWith": "/fedex-container/blobs/Project",
-					"blobPathEndsWith": "*.csv",
-					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('CopyDataFromClientToData_properties_typeProperties_scope')]",
-					"events": [
-						"Microsoft.Storage.BlobCreated"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/pipeline1')]"
 			]
 		}
 	]

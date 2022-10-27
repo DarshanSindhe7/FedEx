@@ -16,12 +16,6 @@
 		},
 		"AzureDatabricks1_properties_typeProperties_existingClusterId": {
 			"value": "1027-123043-uh05wwep"
-		},
-		"CopyDataFromClientToData_properties_pipeline1_parameters_FolderName": {
-			"value": "Project"
-		},
-		"CopyDataFromClientToData_properties_typeProperties_scope": {
-			"value": "/subscriptions/dcaa6303-34ab-4fb8-982f-d7414263c245/resourceGroups/DRS_DEV/providers/Microsoft.Storage/storageAccounts/fedexstoragecontainer"
 		}
 	}
 }

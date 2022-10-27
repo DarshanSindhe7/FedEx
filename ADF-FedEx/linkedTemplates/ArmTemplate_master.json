@@ -23,14 +23,6 @@
 			"type": "string",
 			"defaultValue": "1027-123043-uh05wwep"
 		},
-		"CopyDataFromClientToData_properties_pipeline1_parameters_FolderName": {
-			"type": "string",
-			"defaultValue": "Project"
-		},
-		"CopyDataFromClientToData_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/dcaa6303-34ab-4fb8-982f-d7414263c245/resourceGroups/DRS_DEV/providers/Microsoft.Storage/storageAccounts/fedexstoragecontainer"
-		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -69,12 +61,6 @@
 					},
 					"AzureDatabricks1_properties_typeProperties_existingClusterId": {
 						"value": "[parameters('AzureDatabricks1_properties_typeProperties_existingClusterId')]"
-					},
-					"CopyDataFromClientToData_properties_pipeline1_parameters_FolderName": {
-						"value": "[parameters('CopyDataFromClientToData_properties_pipeline1_parameters_FolderName')]"
-					},
-					"CopyDataFromClientToData_properties_typeProperties_scope": {
-						"value": "[parameters('CopyDataFromClientToData_properties_typeProperties_scope')]"
 					}
 				}
 			},
