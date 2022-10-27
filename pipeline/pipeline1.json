@@ -16,15 +16,11 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "Source",
+						"referenceName": "MetadataSource",
 						"type": "DatasetReference",
 						"parameters": {
-							"Folder": {
-								"value": "@pipeline().parameters.InputFolder",
-								"type": "Expression"
-							},
-							"Files": {
-								"value": "@pipeline().parameters.InputFile",
+							"FolderPath": {
+								"value": "@pipeline().parameters.FolderName",
 								"type": "Expression"
 							}
 						}
@@ -40,13 +36,109 @@
 						"type": "DelimitedTextReadSettings"
 					}
 				}
+			},
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Get Metadata1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Get Metadata1').output.childItems",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Copy data1",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "AzureBlobFSReadSettings",
+										"recursive": true,
+										"wildcardFolderPath": {
+											"value": "@pipeline().parameters.FolderName",
+											"type": "Expression"
+										},
+										"wildcardFileName": {
+											"value": "@item().name",
+											"type": "Expression"
+										},
+										"enablePartitionDiscovery": false
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
+								},
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "ForEachSource",
+									"type": "DatasetReference",
+									"parameters": {
+										"FolderName": {
+											"value": "@pipeline().parameters.FolderName",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ForEachDest",
+									"type": "DatasetReference",
+									"parameters": {
+										"Filename": {
+											"value": "@item().name",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					]
+				}
 			}
 		],
 		"parameters": {
-			"InputFolder": {
-				"type": "string"
-			},
-			"InputFile": {
+			"FolderName": {
 				"type": "string"
 			}
 		},

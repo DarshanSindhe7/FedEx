@@ -1,0 +1,61 @@
+{
+	"name": "ForEachDest",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"Filename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().Filename",
+					"type": "Expression"
+				},
+				"folderPath": "CopiedProject",
+				"fileSystem": "fedex-container"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "duration",
+				"type": "String"
+			},
+			{
+				"name": "start_date",
+				"type": "String"
+			},
+			{
+				"name": "end_date",
+				"type": "String"
+			},
+			{
+				"name": "start_station",
+				"type": "String"
+			},
+			{
+				"name": "end_station",
+				"type": "String"
+			},
+			{
+				"name": "bike",
+				"type": "String"
+			},
+			{
+				"name": "subscription_type",
+				"type": "String"
+			}
+		]
+	}
+}
