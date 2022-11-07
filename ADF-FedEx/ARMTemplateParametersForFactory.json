@@ -16,6 +16,9 @@
 		},
 		"AzureDatabricks1_properties_typeProperties_existingClusterId": {
 			"value": "1027-123043-uh05wwep"
+		},
+		"trigger1_properties_pipeline1_parameters_FolderName": {
+			"value": "DRS"
 		}
 	}
 }
