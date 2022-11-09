@@ -32,17 +32,21 @@
 							"maxConcurrentConnections": 0,
 							"recursive": false,
 							"modifiedDatetimeStart": "2022-10-26T00:50:00.000Z",
-							"modifiedDatetimeEnd": "2022-10-28T00:50:59.000Z",
-							"enablePartitionDiscovery": false
+							"modifiedDatetimeEnd": "2022-11-10T00:50:59.000Z",
+							"wildcardFolderPath": "CopiedProject",
+							"wildcardFileName": "*csv",
+							"enablePartitionDiscovery": true
 						},
 						"formatSettings": {
-							"type": "DelimitedTextReadSettings"
+							"type": "DelimitedTextReadSettings",
+							"skipLineCount": 1
 						}
 					},
 					"sink": {
 						"type": "DelimitedTextSink",
 						"storeSettings": {
-							"type": "AzureBlobFSWriteSettings"
+							"type": "AzureBlobFSWriteSettings",
+							"copyBehavior": "FlattenHierarchy"
 						},
 						"formatSettings": {
 							"type": "DelimitedTextWriteSettings",
@@ -53,7 +57,6 @@
 					"enableStaging": false,
 					"parallelCopies": 14,
 					"enableSkipIncompatibleRow": true,
-					"validateDataConsistency": true,
 					"translator": {
 						"type": "TabularTranslator",
 						"typeConversion": true,
